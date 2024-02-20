@@ -1,12 +1,12 @@
-async function send(body, resHandler) {
+async function send(data, resHandler) {
+  console.log(data)
   const response = await fetch(`/messages`, {
     method: 'POST',
     headers: {
+      'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: {
-      message: body.message
-    }
+    body: JSON.stringify(data)
   })
   if (resHandler) {
     resHandler(response)
@@ -14,15 +14,14 @@ async function send(body, resHandler) {
   return response
 }
 
-async function sendBroadcast(body, resHandler) {
+async function sendBroadcast(data, resHandler) {
   const response = await fetch(`/messages/broadcast`, {
     method: 'POST',
     headers: {
+      'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    body: {
-      message: body.message
-    }
+    body: JSON.stringify(data)
   })
   if (resHandler) {
     resHandler(response)
@@ -34,6 +33,7 @@ async function getLastMessages(resHandler) {
   const response = await fetch(`/messages/last`, {
     method: 'POST',
     headers: {
+      'Accept': 'application/json',
       'Content-Type': 'application/json'
     }
   })

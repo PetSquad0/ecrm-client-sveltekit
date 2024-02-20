@@ -1,2 +1,16 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+  import { test_messages } from '../state'
+</script>
+
+<button on:click={() => test_messages.send({ message: 'Message to myself' })}>
+  Message to myself
+</button>
+<button on:click={() => test_messages.sendBroadcast({ message: 'Message to all' })}>
+  Message to all
+</button>
+<button on:click={() => test_messages.reqLastMessages()}> Update messages </button>
+
+<h1>Messages</h1>
+{#each $test_messages as { id, message }}
+  <li data-id={id}>{message}</li>
+{/each}
